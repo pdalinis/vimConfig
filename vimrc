@@ -99,6 +99,8 @@ set ruler           " Always display the current cursor position in the Status B
 "  Editing text
 set backspace=indent,eol,start  "backspace over everything
 set nojoinspaces          " Use only one space after '.' when joining lines, instead of two
+set completeopt+=longest
+set completeopt-=preview
 
 "  Tabs and indenting
 set tabstop=2             " tab = 2 spaces
