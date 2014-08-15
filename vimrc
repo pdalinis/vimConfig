@@ -9,6 +9,7 @@ Plugin 'kien/ctrlp.vim'
 
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-commentary'
 
 " Colorschemes
 Bundle 'vim-scripts/Wombat'
