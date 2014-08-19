@@ -1,5 +1,5 @@
 let g:go_fmt_command = "gofmt"
-nnoremap <Leader>i :<C-u>call go#complete#Info()<CR>
-nnoremap <Leader>gd :GoDoc<CR>
-nnoremap <Leader>r :<C-u>call go#command#Run(expand('%'))<CR>
-nnoremap <Leader>d :<C-u>call Godef()<CR>
+nmap <Leader>i <Plug>(go-info)
+nmap <Leader>gd <Plug>(go-doc)
+nmap <Leader>r <Plug>(go-run)
+nmap <Leader>d <Plug>(go-def-tab)

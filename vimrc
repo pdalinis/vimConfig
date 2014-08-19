@@ -83,7 +83,7 @@ endif
 set background=dark
 colorscheme gruvbox
 let g:rehash256=1
-":hi Normal guibg=NONE ctermbg=NONE
+set hls
 
 "  Multiple windows
 set laststatus=2      " Show a status line, even if there's only one Vim window
