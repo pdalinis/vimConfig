@@ -15,7 +15,7 @@ Bundle 'tpope/vim-commentary'
 Bundle 'vim-scripts/Wombat'
 Bundle 'zeis/vim-kolor'
 Bundle 'morhetz/gruvbox'
-Bundle 'tomasr/molokai'
+Bundle 'fatih/molokai'
 
 " Indent Guides
 Bundle 'nathanaelkane/vim-indent-guides'
@@ -65,6 +65,7 @@ set ignorecase        " ignore case when using a search pattern
 set smartcase         " override 'ignorecase' when pattern has upper case character Displaying text
 set scrolloff=3       " number of screen lines to show around the cursor
 set number            " show line numbers
+set relativenumber    " show relative numbers
 set linebreak         " For lines longer than the window, wrap intelligently. This doesn't insert hard line breaks.
 set showbreak=↪\ \    " string to put before wrapped screen lines
 set sidescrolloff=2   " min # of columns to keep left/right of cursor
@@ -83,6 +84,7 @@ endif
 set background=dark
 colorscheme gruvbox
 let g:rehash256=1
+"let g:molokai_original = 1
 set hls
 
 "  Multiple windows
