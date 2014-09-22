@@ -129,3 +129,6 @@ set history=200    " Save more commands in history
 
 "  Multi-byte characters
 set encoding=utf-8
+
+" Browser
+let g:netrw_browsex_viewer="google-chrome"
