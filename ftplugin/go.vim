@@ -1,4 +1,4 @@
-let g:go_fmt_command = "gofmt"
+let g:go_fmt_command = "goimports"
 let g:go_doc_keywordprg_enabled=0
 let g:go_highlight_operators=1
 let g:go_highlight_functions = 1

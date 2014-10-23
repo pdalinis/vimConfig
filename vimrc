@@ -22,6 +22,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 
 " Go
 Bundle 'fatih/vim-go'
+Bundle 'rhysd/vim-go-impl'
 
 " Ruby
 Plugin 'vim-ruby/vim-ruby'
