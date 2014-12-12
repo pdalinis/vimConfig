@@ -1,3 +1,4 @@
+set re=1
 "Don't automatically comment the next/previous line after hitting 'o' or 'O'
 setlocal formatoptions-=o
 

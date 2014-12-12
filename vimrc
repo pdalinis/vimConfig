@@ -44,11 +44,13 @@ Bundle 'airblade/vim-gitgutter'
 " Syntax check
 Plugin 'scrooloose/syntastic'
 
+" Paste over
+Bundle 'prurigro/ReplaceWithRegister'
+
 " Powerline
 let g:Powerline_symbols="fancy"
 set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
 set t_Co=256
-
 
 " Filetype detection, plugins, indent, syntax {{{1
 if has('autocmd')
