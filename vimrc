@@ -1,9 +1,9 @@
 filetype off      " Required for Vundle
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
 
@@ -25,7 +25,13 @@ Bundle 'fatih/vim-go'
 Bundle 'rhysd/vim-go-impl'
 
 " Ruby
+Plugin 'tpope/vim-rvm'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-rails'
+let g:ycm_filetype_specific_completion_to_disable = {
+      \ 'ruby': 1
+      \}
 
 " Xml
 Bundle 'othree/xml.vim'
@@ -47,9 +53,15 @@ Plugin 'scrooloose/syntastic'
 " Paste over
 Bundle 'prurigro/ReplaceWithRegister'
 
+call vundle#end()
+
 " Powerline
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
 let g:Powerline_symbols="fancy"
-set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
+" set rtp+=usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 set t_Co=256
 
 " Filetype detection, plugins, indent, syntax {{{1
@@ -99,7 +111,7 @@ set showtabline=2     " always show tab line
 " Terminal
 set ttyfast
 set showcmd         " In the status bar, show incomplete commands as they are typed
-set noshowmode      " don't display the current mode (Insert, Visual, Replace) in the status line. 
+set noshowmode      " don't display the current mode (Insert, Visual, Replace) in the status line.
 set ruler           " Always display the current cursor position in the Status Bar
 
 "  Editing text

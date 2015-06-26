@@ -13,3 +13,6 @@ let g:rubycomplete_rails = 1
 let ruby_fold = 1
 
 compiler ruby
+
+nmap <Leader>d <C-]>
+nmap <Leader>t :CtrlPTag<cr>
