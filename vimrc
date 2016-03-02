@@ -10,6 +10,7 @@ Plugin 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-commentary'
+Plugin 'tpope/vim-obsession'
 
 " Colorschemes
 Bundle 'vim-scripts/Wombat'
@@ -19,6 +20,9 @@ Bundle 'fatih/molokai'
 
 " Indent Guides
 Bundle 'nathanaelkane/vim-indent-guides'
+
+" Dot graphviz
+Bundle 'wannesm/wmgraphviz.vim'
 
 " Go
 Bundle 'fatih/vim-go'
@@ -87,7 +91,7 @@ set sidescrolloff=2   " min # of columns to keep left/right of cursor
 set display+=lastline " show last line, even if it doesn't fit in the window
 set cmdheight=2       " # of lines for the command window cmdheight=2 helps avoid 'Press ENTER...' prompts
 
-  " Define characters to show when you show formatting stolen from https://github.com/tpope/vim-sensible
+" Define characters to show when you show formatting stolen from https://github.com/tpope/vim-sensible
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
   if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
@@ -147,3 +151,8 @@ set encoding=utf-8
 
 " Browser
 let g:netrw_browsex_viewer="google-chrome"
+
+autocmd VimEnter * nested
+      \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
+      \   source Session.vim |
+      \ endif
