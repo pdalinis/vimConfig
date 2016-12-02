@@ -1,4 +1,4 @@
-filetype off      " Required for Vundle
+filetype off      " Required for Vundle   
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -21,15 +21,18 @@ Bundle 'fatih/molokai'
 " Indent Guides
 Bundle 'nathanaelkane/vim-indent-guides'
 
+" Trailing white space
+Plugin 'ntpeters/vim-better-whitespace'
+
 " Dot graphviz
 Bundle 'wannesm/wmgraphviz.vim'
 
 " Go
 Bundle 'fatih/vim-go'
-Bundle 'rhysd/vim-go-impl'
+"Bundle 'rhysd/vim-go-impl'
 
 " Ruby
-Plugin 'tpope/vim-rvm'
+"Plugin 'tpope/vim-rvm'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-rails'
@@ -57,9 +60,13 @@ Plugin 'scrooloose/syntastic'
 " Paste over
 Bundle 'prurigro/ReplaceWithRegister'
 
+" Search with Replace
+Bundle 'dkprice/vim-easygrep'
+
 call vundle#end()
 
 " Powerline
+set rtp+=/Users/peterdalinis/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
@@ -151,6 +158,8 @@ set encoding=utf-8
 
 " Browser
 let g:netrw_browsex_viewer="google-chrome"
+
+set spell spelllang=en_us
 
 autocmd VimEnter * nested
       \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
