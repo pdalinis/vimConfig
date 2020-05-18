@@ -1,11 +1,18 @@
-filetype off      " Required for Vundle   
+filetype off      " Required for Vundle
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+set shell=/bin/bash
+
+if has('python3')
+  silent! python3 1
+endif
 
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
+
+Plugin 'kshenoy/vim-signature'
 
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
@@ -24,12 +31,24 @@ Bundle 'nathanaelkane/vim-indent-guides'
 " Trailing white space
 Plugin 'ntpeters/vim-better-whitespace'
 
+" Rainbow ()'s
+Plugin 'luochen1990/rainbow'
+
 " Dot graphviz
 Bundle 'wannesm/wmgraphviz.vim'
 
 " Go
 Bundle 'fatih/vim-go'
 "Bundle 'rhysd/vim-go-impl'
+" Plugin 'jodosha/vim-godebug'
+
+Plugin 'pangloss/vim-javascript'
+
+" C
+Plugin 'vim-scripts/a.vim'
+
+" ctags
+Plugin 'craigemery/vim-autotag'
 
 " Ruby
 "Plugin 'tpope/vim-rvm'
@@ -40,6 +59,13 @@ let g:ycm_filetype_specific_completion_to_disable = {
       \ 'ruby': 1
       \}
 
+" terraform
+Plugin 'hashivim/vim-terraform'
+
+" cloudformation
+" Plugin 'speshak/vim-cfn'
+" let g:syntastic_cloudformation_checkers = ['cfn_lint']
+
 " Xml
 Bundle 'othree/xml.vim'
 
@@ -49,9 +75,23 @@ Plugin 'elzr/vim-json'
 " Markdown
 Plugin 'tpope/vim-markdown'
 
+" yaml
+Plugin 'stephpy/vim-yaml'
+
+" nginx
+Plugin 'chr4/nginx.vim'
+
+" .csv
+Plugin 'chrisbra/csv.vim'
+
+" php
+Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'StanAngeloff/php.vim'
+
 " Git
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-rhubarb'
 Bundle 'airblade/vim-gitgutter'
 
 " Syntax check
@@ -66,10 +106,10 @@ Bundle 'dkprice/vim-easygrep'
 call vundle#end()
 
 " Powerline
-set rtp+=/Users/peterdalinis/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+" set rtp+=/Users/peterdalinis/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 
 let g:Powerline_symbols="fancy"
 " set rtp+=usr/local/lib/python2.7/site-packages/powerline/bindings/vim
@@ -165,3 +205,7 @@ autocmd VimEnter * nested
       \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
       \   source Session.vim |
       \ endif
+
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
+" let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'

@@ -6,3 +6,4 @@ let g:syntastic_check_on_open = 1
 " disable syntastic for go
 let g:syntastic_aggregate_errors = 1
 "let g:syntastic_go_checkers=['']
+let g:syntastic_yaml_checkers = ['yamllint']
