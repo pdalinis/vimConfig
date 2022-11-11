@@ -1,109 +1,111 @@
 filetype off      " Required for Vundle
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 set shell=/bin/bash
-
 if has('python3')
   silent! python3 1
 endif
+call plug#begin()
 
-Plugin 'gmarik/Vundle.vim'
 
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
-Plugin 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature'
 
-Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-commentary'
-Plugin 'tpope/vim-obsession'
+Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-obsession'
 
 " Colorschemes
-Bundle 'vim-scripts/Wombat'
-Bundle 'zeis/vim-kolor'
-Bundle 'morhetz/gruvbox'
-Bundle 'fatih/molokai'
+Plug 'vim-scripts/Wombat'
+Plug 'zeis/vim-kolor'
+Plug 'morhetz/gruvbox'
+Plug 'fatih/molokai'
 
 " Indent Guides
-Bundle 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Trailing white space
-Plugin 'ntpeters/vim-better-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
 
 " Rainbow ()'s
-Plugin 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow'
 
 " Dot graphviz
-Bundle 'wannesm/wmgraphviz.vim'
+Plug 'wannesm/wmgraphviz.vim'
 
 " Go
-Bundle 'fatih/vim-go'
-"Bundle 'rhysd/vim-go-impl'
-" Plugin 'jodosha/vim-godebug'
+Plug 'fatih/vim-go'
+"Plug 'rhysd/vim-go-impl'
+" Plug 'jodosha/vim-godebug'
 
-Plugin 'pangloss/vim-javascript'
+" Javascript/Typescript
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'eliba2/vim-node-inspect'
+
 
 " C
-Plugin 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim'
 
 " ctags
-Plugin 'craigemery/vim-autotag'
+" Plug 'craigemery/vim-autotag'
 
 " Ruby
-"Plugin 'tpope/vim-rvm'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-rails'
+"Plug 'tpope/vim-rvm'
+Plug 'vim-ruby/vim-ruby'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-rails'
 let g:ycm_filetype_specific_completion_to_disable = {
       \ 'ruby': 1
       \}
 
 " terraform
-Plugin 'hashivim/vim-terraform'
+Plug 'hashivim/vim-terraform'
 
 " cloudformation
-" Plugin 'speshak/vim-cfn'
+" Plug 'speshak/vim-cfn'
 " let g:syntastic_cloudformation_checkers = ['cfn_lint']
 
 " Xml
-Bundle 'othree/xml.vim'
+Plug 'othree/xml.vim'
 
 " Json
-Plugin 'elzr/vim-json'
+Plug 'elzr/vim-json'
 
 " Markdown
-Plugin 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 
 " yaml
-Plugin 'stephpy/vim-yaml'
+Plug 'stephpy/vim-yaml'
 
 " nginx
-Plugin 'chr4/nginx.vim'
+Plug 'chr4/nginx.vim'
 
 " .csv
-Plugin 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim'
 
 " php
-Plugin '2072/PHP-Indenting-for-VIm'
-Plugin 'StanAngeloff/php.vim'
+Plug '2072/PHP-Indenting-for-VIm'
+Plug 'StanAngeloff/php.vim'
+Plug 'phpstan/vim-phpstan'
 
 " Git
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rhubarb'
-Bundle 'airblade/vim-gitgutter'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
+Plug 'tommcdo/vim-fubitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'airblade/vim-gitgutter'
 
 " Syntax check
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " Paste over
-Bundle 'prurigro/ReplaceWithRegister'
+Plug 'prurigro/ReplaceWithRegister'
 
 " Search with Replace
-Bundle 'dkprice/vim-easygrep'
+Plug 'dkprice/vim-easygrep'
 
-call vundle#end()
+call plug#end()
 
 " Powerline
 " set rtp+=/Users/peterdalinis/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
@@ -209,3 +211,67 @@ autocmd VimEnter * nested
 " set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+"
+command -nargs=1 TabExpand call HandleTabTagExpand( <f-args> )
+
+let s:commentchar = """
+
+function HandleTabTagExpand(tagnumber)
+    let tagident = expand("<cword>")
+    redir @a
+    try
+        sil exe "tselect ".tagident
+    catch /^Vim(\a\+):E433:/ " no tag file
+        echom "No tag file found."
+        return
+    catch /^Vim(\a\+):E426:/ " tag not found
+        echom "Tag not found."
+        return
+    endtry
+    redir END
+    let tagresults = split(@a, "\n")
+    let tagmatches = []
+    let linenum = 0
+    for line in tagresults
+        if linenum % 3 != 1
+            " every third line contains the file names
+            let linenum = linenum + 1
+            continue
+        endif
+        " figure out where the filename actually starts
+        " (it's usually column 32, but it might be farther)
+        " one before 32 is 31, but index is 30 since arrays begin at zero
+        let filestart = 30
+        let c = line[filestart]
+        while (filestart < strlen(line))
+            let filestart = filestart + 1
+            if c == " "
+                break
+            endif
+            let c = line[filestart]
+        endwhile
+        " store the parsed match in an array
+        call add(tagmatches, strpart(line, filestart))
+        let linenum = linenum + 1
+    endfor
+    " navigate to the match specified by tagnumber
+    try
+        exe "tab drop ".tagmatches[a:tagnumber-1]
+    catch /^Vim(\a\+):E471:/ " argument required (means no tag found)
+        echom "Tag not found."
+    endtry
+    let done = 0
+    let matchcount = 0
+    let f_line = ""
+    while done < 1 && matchcount < 1000
+        sil exe "/".tagident
+        let f_line = getline(".")
+        let matchcount = matchcount + 1
+        if match(f_line, "^\s+".s:commentchar) < 0
+            let done = 1
+        endif
+    endwhile
+    let f_index = stridx( f_line, tagident )
+    sil exe "normal 0"
+    sil exe "normal ".f_index."l"
+endfunction

@@ -32,8 +32,10 @@ endfunction
 nnoremap <silent> <F3> :set hlsearch!<cr>
 
 " Open all in tabs
+nnoremap <leader>ot :tab sball<cr>
 nnoremap <leader>og :call OpenAllInTabs("go")<cr>
 nnoremap <leader>or :call OpenAllInTabs("rb")<cr>
+nnoremap <leader>oj :call OpenAllInTabs("js")<cr>
 function! OpenAllInTabs(type)
   :0,100bd
   execute ":n **/*.".a:type
